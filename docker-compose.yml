@@ -1,0 +1,55 @@
+version: "3"
+services:
+  db:
+    image: postgres:15-alpine3.17
+    environment:
+      # https://github.com/docker-library/docs/blob/master/postgres/README.md
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB_MAIN}
+    volumes:
+      - ./wanderer-db/db-init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - ${PG_PORT}:5432
+
+  server:
+    depends_on:
+      - db
+    build: server
+    environment:
+      DATABASE_HOST: db
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB_MAIN}
+      CN_PORT: ${CN_WS_PORT}
+      CN_PROTO: ${CN_PROTO}
+      SSL_PATH_KEY: ${SSL_PATH_KEY}
+      SSL_PATH_CERT: ${SSL_PATH_CERT}
+      PG_DB_MAIN: ${PG_DB_MAIN}
+      PG_DB_CACHE: ${PG_DB_CACHE}
+      PG_DB_EVE_STATIC_DATA: ${PG_DB_EVE_STATIC_DATA}
+      PG_DB_DUMMY: ${PG_DB_DUMMY}
+      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
+      EVE_SECRET_KEY: ${EVE_SECRET_KEY}
+    ports:
+      - ${CN_WS_PORT}:${CN_WS_PORT}
+    volumes:
+      - ./ssl:/usr/src/app/ssl
+
+  client:
+    depends_on:
+      - db
+      - server
+    build: client
+    environment:
+      CN_WS_HOST: ${CN_WS_HOST}
+      CN_WS_PORT: ${CN_WS_PORT}
+      CN_WS_PROTO: ${CN_WS_PROTO}
+      SSL_PATH_KEY: ${SSL_PATH_KEY}
+      SSL_PATH_CERT: ${SSL_PATH_CERT}
+      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
+      HTTP_PORT: ${HTTP_PORT}
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}
+    volumes:
+      - ./ssl:/usr/src/app/ssl
