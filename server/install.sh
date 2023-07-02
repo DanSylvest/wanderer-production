@@ -6,15 +6,18 @@ echo '_____________ INITIAL FOLDER STATE _____________'
 ls -al
 echo '_____________ INITIAL FOLDER STATE _____________'
 
+ROOT="$REL/wanderer-server";
+echo "root path $ROOT";
+
+
 if [ -f "lockfile" ]; then # will exit if all was installed
     echo "Starting..."
+    cd "$ROOT" || exit;
     npm run start
     echo "Started"
     exit 1;
 fi
 
-ROOT="$REL/wanderer-server";
-echo "root path $ROOT";
 
 rm -rf ./wanderer-server
 git clone https://github.com/DanSylvest/wanderer-server.git;

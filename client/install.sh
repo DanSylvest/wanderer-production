@@ -6,16 +6,17 @@ echo '_____________ INITIAL FOLDER STATE _____________'
 ls -al
 echo '_____________ INITIAL FOLDER STATE _____________'
 
+ROOT="$REL/wanderer-client";
+echo "root path $ROOT";
+
 if [ -f "lockfile" ]; then # will exit if all was installed
     echo "Starting..."
+    cd "$ROOT" || exit;
     npm run buildDev
     npm run host:ssl
     echo "Started"
     exit 1;
 fi
-
-ROOT="$REL/wanderer-client";
-echo "root path $ROOT";
 
 rm -rf ./wanderer-client
 git clone https://github.com/DanSylvest/wanderer-client.git;
