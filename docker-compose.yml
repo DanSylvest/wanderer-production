@@ -31,6 +31,7 @@ services:
       PG_DB_DUMMY: ${PG_DB_DUMMY}
       EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
       EVE_SECRET_KEY: ${EVE_SECRET_KEY}
+      UPDATE: ${UPDATE}
     ports:
       - ${CN_WS_PORT}:${CN_WS_PORT}
     volumes:
@@ -49,6 +50,7 @@ services:
       SSL_PATH_CERT: ${SSL_PATH_CERT}
       EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
       HTTP_PORT: ${HTTP_PORT}
+      UPDATE: ${UPDATE}
     ports:
       - ${HTTP_PORT}:${HTTP_PORT}
     volumes:
