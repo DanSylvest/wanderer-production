@@ -92,7 +92,7 @@ if [ "$UPDATE" = "true" ]; then
     exit 1;
 fi
 
-if [ -f "lockfile" ]; then # will exit if all was installed
+if [ -f "${REL}/lockfile" ]; then # will exit if all was installed
     echo "Starting..."
     cd "$ROOT" || exit;
     npm run start

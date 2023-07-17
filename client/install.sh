@@ -61,7 +61,7 @@ if [ "$UPDATE" = "true" ]; then
     rm -rf "${REL}/lockfile"
 fi
 
-if [ -f "lockfile" ]; then # will exit if all was installed
+if [ -f "${REL}/lockfile" ]; then # will exit if all was installed
     cd "$ROOT" || exit;
     run;
     exit 1;
