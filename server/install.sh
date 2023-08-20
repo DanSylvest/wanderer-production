@@ -84,6 +84,7 @@ if [ "$UPDATE" = "true" ]; then
     npm install;
     npm run updateСached
     npm run updateSwagger
+    npm run updateEveDb
     echo "Finished installing DB part";
     echo "" > "${REL}/lockfile"
     echo "Starting..."
