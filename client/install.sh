@@ -2,6 +2,27 @@ REL=$(pwd);
 ROOT="$REL/wanderer-client";
 echo "root path $ROOT";
 
+inject() {
+  INDEX_HTML="$ROOT/public/index.html"
+
+  echo "INJECTED files - "
+  echo "$INDEX_HTML"
+
+  # Проходим по всем файлам с шаблоном *_head.*
+  for file in $REL/injections/*_head.*; do
+      # Проверяем, что это действительно файл, а не директория или другой объект
+      if [ -f "$file" ]; then
+          # Вставляем содержимое файла перед закрывающим тегом </head>
+          while IFS= read -r line; do
+              sed -i "/<\/head>/i $line" $INDEX_HTML
+          done < "$file"
+      fi
+  done
+
+  cat $INDEX_HTML
+  echo "END INJECTED files -"
+}
+
 run () {
     echo "Starting..."
     npm run buildDev
@@ -74,6 +95,7 @@ git clone https://github.com/DanSylvest/wanderer-client.git;
 
 ls -al
 
+inject
 create_config
 
 echo '_____________ CONFIG CLIENT _____________'

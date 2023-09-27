@@ -13,6 +13,7 @@ ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.s
 RUN chmod +x /wait-for-it.sh
 
 COPY install.sh install.sh
+COPY injections/ injections/
 
 RUN chmod +x install.sh
 
