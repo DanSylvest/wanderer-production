@@ -1,1 +1,1 @@
-docker-compose --env-file=.env.local stop server client
+docker-compose --env-file=.env.local stop server client builder

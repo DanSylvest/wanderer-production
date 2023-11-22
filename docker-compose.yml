@@ -12,12 +12,19 @@ services:
     ports:
       - ${PG_PORT}:5432
 
+  builder:
+    build: route-builder
+    volumes:
+      - ./ssl:/usr/src/app/ssl
+
   server:
     depends_on:
       - db
+      - builder
     build: server
     environment:
       DATABASE_HOST: db
+      EVE_ROUTE_BUILDER_HOST: ${EVE_ROUTE_BUILDER_HOST}
       POSTGRES_PASSWORD: ${PG_PWD}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_DB: ${PG_DB_MAIN}

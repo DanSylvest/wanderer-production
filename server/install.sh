@@ -1,4 +1,4 @@
-echo 'Start installing 6';
+echo 'Start installing wanderer-server';
 
 REL=$(pwd);
 ROOT="$REL/wanderer-server";
@@ -31,6 +31,9 @@ create_config () {
         \"client_id\": \"${EVE_CLIENT_KEY}\",
         \"secret_key\": \"${EVE_SECRET_KEY}\"
       }
+    },
+    \"api\": {
+      \"routesHost\": \"${EVE_ROUTE_BUILDER_HOST}\"
     }
   }" > "$ROOT/js/conf/custom.json";
 
