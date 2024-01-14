@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker-compose --env-file=.env.local rm server client builder
+docker-compose --env-file=.env.local rm server client builder zkb-provider

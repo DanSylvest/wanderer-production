@@ -1,1 +1,1 @@
-docker-compose --env-file=.env.local up server client builder
+docker-compose --env-file=.env.local up server client builder zkb-provider

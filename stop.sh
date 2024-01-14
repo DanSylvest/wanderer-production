@@ -1,1 +1,1 @@
-docker-compose --env-file=.env.local stop server client builder
+docker-compose --env-file=.env.local stop server client builder zkb-provider
