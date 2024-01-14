@@ -33,7 +33,8 @@ create_config () {
       }
     },
     \"api\": {
-      \"routesHost\": \"${EVE_ROUTE_BUILDER_HOST}\"
+      \"routesHost\": \"${EVE_ROUTE_BUILDER_HOST}\",
+      \"zkbKillsHost\": \"${ZKB_KILLS_HOST}\"
     }
   }" > "$ROOT/js/conf/custom.json";
 

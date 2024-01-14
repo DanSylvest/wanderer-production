@@ -12,10 +12,19 @@ services:
     ports:
       - ${PG_PORT}:5432
 
+  zkb-provider:
+    build: zkb-provider
+    volumes:
+      - ./ssl:/usr/src/app/ssl
+    environment:
+      PORT: ${ZKB_KILLS_PORT}
+
   builder:
     build: route-builder
     volumes:
       - ./ssl:/usr/src/app/ssl
+    environment:
+      PORT: ${EVE_ROUTE_BUILDER_PORT}
 
   server:
     depends_on:
@@ -25,6 +34,7 @@ services:
     environment:
       DATABASE_HOST: db
       EVE_ROUTE_BUILDER_HOST: ${EVE_ROUTE_BUILDER_HOST}
+      ZKB_KILLS_HOST: ${ZKB_KILLS_HOST}
       POSTGRES_PASSWORD: ${PG_PWD}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_DB: ${PG_DB_MAIN}
@@ -41,13 +51,14 @@ services:
       UPDATE: ${UPDATE}
     ports:
       - ${CN_WS_PORT}:${CN_WS_PORT}
+#      - 9229:9229
     volumes:
       - ./ssl:/usr/src/app/ssl
 
   client:
-    depends_on:
-      - db
-      - server
+#    depends_on:
+#      - db
+#      - server
     build: client
     environment:
       CN_WS_HOST: ${CN_WS_HOST}

@@ -21,7 +21,7 @@ npm i -g @nestjs/cli
 
 echo 'Start installing';
 
-rm -rf ./wanderer-client
+rm -rf ./eve-route-builder
 git clone https://github.com/DanSylvest/eve-route-builder.git;
 
 echo '_____________ INITIAL FOLDER STATE _____________'
